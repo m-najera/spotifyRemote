@@ -9,6 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 * [NodeJS] https://nodejs.org/
 * [Ionic Latest] - npm install -g ionic cordova
 * [Angular Latest] - npm install -g @angular/cli
+* [Nodemon] - npm install -g nodemon
 ```
 
 ## How to get Spotify Keys

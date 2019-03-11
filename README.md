@@ -6,7 +6,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 ```
-* [NodeJS](https://nodejs.org/dist/v10.15.3/node-v10.15.3-x64.msi) - The web framework used
+* [NodeJS] https://nodejs.org/
 * [Ionic Latest] - npm install -g ionic cordova
 * [Angular Latest] - npm install -g @angular/cli
 ```
@@ -24,7 +24,7 @@ cd webapp/
 npm install
 npm run start
 
-Open the web app *[http://localhost:4200](http://localhost:4200)
+Open the web app http://localhost:4200
 Replace the  keys generated in the website into 
 
 server/app/services/spotifyApi.js

@@ -12,7 +12,7 @@ const load = require('express-load');
 const path = require('path');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 const swaggerJSDoc = require('swagger-jsdoc');
 const cors = require('cors');
 
@@ -56,14 +56,14 @@ app.get('/swagger.json', function (req, res) { res.setHeader('Content-Type', 'ap
 
 // ---------------------------------------------------------------------------------------
 
-if (process.env.MONGO_DB) {
+// if (process.env.MONGO_DB) {
 
-    mongoose.connect(process.env.MONGO_DB);
-    mongoose.connection.on('open', () => {
-        console.log('A new connection has been pluged');
-    });
+//     mongoose.connect(process.env.MONGO_DB);
+//     mongoose.connection.on('open', () => {
+//         console.log('A new connection has been pluged');
+//     });
 
-}
+// }
 
 // ---------------------------------------------------------------------------------------
 

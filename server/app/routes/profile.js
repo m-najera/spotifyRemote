@@ -68,16 +68,76 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /profile/playlist/:name:
-     *   post:
+     * /profile/playlist/:playlistId:
+     *   get:
      *     tags:
      *       - profile
-     *     description: Adds new profile playlist
+     *     description: Returns playlist info
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: Playlist object
+     *         description: Tracks object
      */
-    app.post('/profile/playlist/:name', c(controller.addPlaylist, (req, res, next) => [req.params.name]));
+    app.get('/profile/playlists/:playlistId', c(controller.playlistInfo, (req, res, next) => [req.params.playlistId]));
+
+    /**
+     * @swagger
+     * /profile/listening/play:
+     *   put:
+     *     tags:
+     *       - listening
+     *     description: Resume current song
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: ok
+     */
+    app.put('/profile/listening/play', c(controller.play));
+
+    /**
+     * @swagger
+     * /profile/listening/pause:
+     *   put:
+     *     tags:
+     *       - listening
+     *     description: Pauses current song
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: ok
+     */
+    app.put('/profile/listening/pause', c(controller.pause));
+
+    /**
+     * @swagger
+     * /profile/listening/pause:
+     *   post:
+     *     tags:
+     *       - listening
+     *     description: Pauses current song
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: ok
+     */
+    app.post('/profile/listening/forwards', c(controller.next));
+
+    /**
+     * @swagger
+     * /profile/listening/back:
+     *   post:
+     *     tags:
+     *       - listening
+     *     description: Pauses current song
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: ok
+     */
+    app.post('/profile/listening/backwards', c(controller.previous));
 };

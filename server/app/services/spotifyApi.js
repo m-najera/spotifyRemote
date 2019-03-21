@@ -16,6 +16,11 @@ module.exports = () => {
         addPlaylist: addPlaylist,
         addPlaylistTrack: addPlaylistTrack,
         removePlaylistTrack: removePlaylistTrack,
+        getPlaylistInfo: getPlaylistInfo,
+        play: play,
+        pause: pause,
+        next: next,
+        previous: previous,
         getToken: getToken
     };
 };
@@ -51,6 +56,36 @@ async function profilePlaylists() {
 async function playlistTracks(playlistId) {
     await refreshAccessToken();
     const data = await spotifyApi.getPlaylistTracks(playlistId);
+    return data.body || {};
+}
+
+async function play() {
+    await refreshAccessToken();
+    const data = await spotifyApi.play();
+    return data.body || {};
+}
+
+async function pause() {
+    await refreshAccessToken();
+    const data = await spotifyApi.pause();
+    return data.body || {};
+}
+
+async function next() {
+    await refreshAccessToken();
+    const data = await spotifyApi.skipToNext();
+    return data.body || {};
+}
+
+async function previous() {
+    await refreshAccessToken();
+    const data = await spotifyApi.skipToPrevious();
+    return data.body || {};
+}
+
+async function getPlaylistInfo(playlistId) {
+    await refreshAccessToken();
+    const data = await spotifyApi.getPlaylist(playlistId);
     return data.body || {};
 }
 

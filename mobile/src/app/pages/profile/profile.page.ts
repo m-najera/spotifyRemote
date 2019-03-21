@@ -6,7 +6,7 @@ import { ProfileService } from '../../services/profile.service';
   templateUrl: 'profile.page.html',
   styleUrls: ['profile.page.scss']
 })
-export class ProfilePage implements OnInit{
+export class ProfilePage implements OnInit {
   profile: any;
   profile$: any;
   currentSong$: any;
@@ -15,7 +15,7 @@ export class ProfilePage implements OnInit{
   loading = false;
   isPaused: boolean;
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService) { }
 
   ngOnInit() {
     this.loading = true;
@@ -28,43 +28,73 @@ export class ProfilePage implements OnInit{
 
   getProfile() {
     this.profile$ = this.profileService.getProfile()
-    .subscribe((data) => {
-      return this.profile = data;
-    },
-    (err) => {
-      console.error(err);
-    });
+      .subscribe((data) => {
+        return this.profile = data;
+      },
+        (err) => {
+          console.error(err);
+        });
   }
 
   getCurrentSong() {
     this.currentSong$ = this.profileService.getCurrentSong()
-    .subscribe((data) => {
-      this.loading = false;
-      if (!data) {
-        this.isPlaying = true;
-      } else {
-        if (!data.is_playing) {
-          this.isPaused = true;
-        } else {
+      .subscribe((data) => {
+        this.loading = false;
+        if (!data) {
           this.isPlaying = true;
+        } else {
+          if (!data.is_playing) {
+            this.isPaused = true;
+            this.isPlaying = false;
+          } else {
+            this.isPlaying = true;
+          }
+          return this.currentSong = data;
         }
-        return this.currentSong = data;
-      }
-    }, (err) => {
-      this.loading = false;
-      console.error(err);
-    });
-  }
-
-  skipBack() {
-
+      }, (err) => {
+        this.loading = false;
+        console.error(err);
+      });
   }
 
   playPause() {
+    if (this.isPlaying) {
+      this.profileService.pause()
+        .subscribe(() => {
+          this.isPlaying = false;
+        },
+          (err) => {
+            console.error(err);
+          });
+    } else {
+      this.profileService.play()
+        .subscribe(() => {
+          this.isPlaying = true;
+        },
+          (err) => {
+            console.error(err);
+          });
+    }
+  }
 
+  skipBack() {
+    this.profileService.previous()
+      .subscribe(() => {
+        this.isPlaying = false;
+        this.getCurrentSong();
+      },
+        (error) => console.error(error)
+      );
   }
 
   skipForward() {
-
+    console.log(this.profileService.next);
+    this.profileService.next()
+      .subscribe(() => {
+        this.isPlaying = false;
+        this.getCurrentSong();
+      },
+        (error) => console.error(error)
+      );
   }
 }

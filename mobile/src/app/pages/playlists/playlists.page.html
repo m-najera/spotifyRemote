@@ -1,7 +1,7 @@
 <ion-header color="dark">
   <ion-toolbar color="dark">
     <ion-title>
-      <small>Playlists</small>
+      Playlists
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,7 +9,7 @@
 <ion-content color="dark">
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="success">
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="add" (click)="newPlaylistPrompt()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 

@@ -19,6 +19,9 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    // window.setInterval(() => {
+    //   this.checkCurrentSong();
+    // }, 3000);
   }
 
   ionViewWillEnter() {
@@ -34,6 +37,17 @@ export class ProfilePage implements OnInit {
         (err) => {
           console.error(err);
         });
+  }
+
+  checkCurrentSong() {
+    this.profileService.getCurrentSong()
+      .subscribe((data) => {
+        if (data.item.id !== this.currentSong.item.id) {
+          return this.currentSong = data;
+        }
+      }, (err) => {
+        console.error(err);
+      });
   }
 
   getCurrentSong() {
@@ -62,6 +76,7 @@ export class ProfilePage implements OnInit {
       this.profileService.pause()
         .subscribe(() => {
           this.isPlaying = false;
+          this.isPaused = true;
         },
           (err) => {
             console.error(err);
@@ -70,6 +85,7 @@ export class ProfilePage implements OnInit {
       this.profileService.play()
         .subscribe(() => {
           this.isPlaying = true;
+          this.isPaused = false;
         },
           (err) => {
             console.error(err);
@@ -88,7 +104,6 @@ export class ProfilePage implements OnInit {
   }
 
   skipForward() {
-    console.log(this.profileService.next);
     this.profileService.next()
       .subscribe(() => {
         this.isPlaying = false;

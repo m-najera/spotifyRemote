@@ -14,7 +14,8 @@ export class PlaylistSongsPage implements OnInit {
   tracksTemp: any;
   tracks$: any;
 
-  playlistname: string;
+  playlistName: string;
+  playlistOwner: string;
   playlist$: any;
   playlists: any;
   playlists$: any;
@@ -40,8 +41,9 @@ export class PlaylistSongsPage implements OnInit {
 
   async getPlaylistInfo() {
     this.playlists$ = this._profileService.getPlaylistInfo(this.id).subscribe((data) => {
+      this.playlistOwner = data.owner.display_name;
       this.playlists = data;
-      this.playlistname = data.name;
+      this.playlistName = data.name;
     },
       (err) => {
         console.log(err);

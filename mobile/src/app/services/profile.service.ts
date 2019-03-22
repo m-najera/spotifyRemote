@@ -45,4 +45,8 @@ export class ProfileService {
   getPlaylistTracks(id: string): Observable<any>{
     return this.http.get(`${API_URL}/profile/playlist/${id}/tracks`);
   }
+
+  addPlaylist(name: string): Observable<any>{
+    return this.http.post(`${API_URL}/profile/playlist/${name}`, name);
+  }
 }

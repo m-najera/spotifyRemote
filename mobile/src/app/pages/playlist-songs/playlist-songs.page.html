@@ -3,12 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{playlistname}}</ion-title>
+    <ion-title>{{playlistName}} by {{playlistOwner}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="dark">
-  <ion-label color="medium">{{id}}</ion-label>
   <div text-center *ngIf="loading">
     <ion-row align-items-center>
       <ion-col align-self-center>

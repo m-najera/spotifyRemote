@@ -140,4 +140,20 @@ module.exports = (app) => {
      *         description: ok
      */
     app.post('/profile/listening/backwards', c(controller.previous));
+
+        /**
+     * @swagger
+     * /profile/playlist/:name:
+     *   post:
+     *     tags:
+     *       - profile
+     *     description: Adds new playlist
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: Playlist object
+     */
+    app.post('/profile/playlist/:name', c(controller.addPlaylist, (req, res, next) => [req.params.name]));
+
 };

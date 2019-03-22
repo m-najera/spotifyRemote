@@ -56,12 +56,14 @@ export class ProfilePage implements OnInit {
         this.loading = false;
         if (!data) {
           this.isPlaying = true;
+          this.isPaused = false;
         } else {
           if (!data.is_playing) {
             this.isPaused = true;
             this.isPlaying = false;
           } else {
             this.isPlaying = true;
+            this.isPaused = false;
           }
           return this.currentSong = data;
         }
@@ -96,7 +98,6 @@ export class ProfilePage implements OnInit {
   skipBack() {
     this.profileService.previous()
       .subscribe(() => {
-        this.isPlaying = false;
         this.getCurrentSong();
       },
         (error) => console.error(error)
@@ -106,7 +107,6 @@ export class ProfilePage implements OnInit {
   skipForward() {
     this.profileService.next()
       .subscribe(() => {
-        this.isPlaying = false;
         this.getCurrentSong();
       },
         (error) => console.error(error)
